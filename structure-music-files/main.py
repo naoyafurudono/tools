@@ -32,8 +32,8 @@ def run(
         obj_path = os.path.join(out_dir, dir_path, title + obj_extension)
         table[target_path] = obj_path
 
-    for frm, to in table.items():
-        os.makedirs(os.path.dirname(to), exist_ok=True)
+    for obj_path in table.values():
+        os.makedirs(os.path.dirname(obj_path), exist_ok=True)
     with Pool(THREAD) as p:
         p.map(conv, table.items())
 
