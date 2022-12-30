@@ -22,7 +22,7 @@
 ### コマンドの使用
 
 ```
-usage: python3 main.py [-h] [-o OUT] [--object_extension OBJECT_EXTENSION] -t TARGET_EXTENSION target_dir
+usage: main.py [-h] [-o OUT] [--object-extension OBJECT_EXTENSION] -t TARGET_EXTENSION target_dir
 
 positional arguments:
   target_dir
@@ -30,9 +30,9 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   -o OUT, --out OUT     output directly name
-  --object_extension OBJECT_EXTENSION
+  --object-extension OBJECT_EXTENSION
                         result file extension
-  -t TARGET_EXTENSION, --target_extension TARGET_EXTENSION
+  -t TARGET_EXTENSION, --target-extension TARGET_EXTENSION
                         input file extension used to filter files
 ```
 
