@@ -8,6 +8,7 @@
 ## 依存ソフト
 
 - `ffmpeg`
+- `python3`
 
 ## 使い方
 
@@ -17,7 +18,7 @@
     - 各自頑張ること
 1. 依存ライブラリのインストール
     - `pip install -r requirements.txt -t lib~`
-    - `lib~`にインストールすること。ソースコードでハードコードしているので
+    - `lib~`にインストールすることに注意。ハードコードしている。
 
 ### コマンドの使用
 
@@ -53,7 +54,7 @@ hectopascal
 以下を実行する。
 
 ```sh
-python3 main.py -t ".m4a" hectopascal/
+./main.py -t ".m4a" hectopascal/
 ```
 
 カレントディレクトリに以下のように`out`フォルダが作られる。
