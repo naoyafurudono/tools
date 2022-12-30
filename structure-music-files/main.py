@@ -4,7 +4,7 @@
 import multiprocessing
 from os import path
 import os
-from typing import Callable, Tuple
+from typing import Tuple
 import sys
 
 sys.path.append(path.join(path.dirname(__file__), "lib~"))
