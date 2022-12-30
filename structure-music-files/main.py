@@ -13,16 +13,16 @@ import ffmpeg
 
 def run(
     target_dir: str,
-    out_dir: str,
+    target_extension: str,
     obj_extension: str,
-    is_target_filename: Callable[[str], bool],
+    out_dir: str,
     quiet: bool,
 ):
     table = {}
     for target_path in (
         path.join(target_dir, filename)
         for filename in os.listdir(target_dir)
-        if is_target_filename(filename)
+        if filename.endswith(target_extension)
     ):
         info = ffmpeg.probe(target_path)["format"]["tags"]
         title = info["title"]
@@ -81,9 +81,9 @@ def main():
 
     run(
         target_dir=args.target_dir,
-        out_dir=args.out,
+        target_extension=args.target_extension,
         obj_extension=args.object_extension,
-        is_target_filename=lambda filepath: filepath.endswith(args.target_extension),
+        out_dir=args.out,
         quiet=args.quiet,
     )
 
