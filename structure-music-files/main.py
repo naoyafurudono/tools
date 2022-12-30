@@ -36,12 +36,12 @@ def run(
     for obj_path in table.values():
         os.makedirs(os.path.dirname(obj_path), exist_ok=True)
     with Pool(THREAD) as p:
-        p.map(conv, table.items())
+        p.map(lambda inst: conv(inst, quiet), table.items())
 
 
-def conv(inst: Tuple[str, str]):
+def conv(inst: Tuple[str, str], quiet: bool):
     frm, to = inst
-    ffmpeg.input(frm).output(to).run(quiet=quit)
+    ffmpeg.input(frm).output(to).run(quiet=quiet)
 
 
 def main():
