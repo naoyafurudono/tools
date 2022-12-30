@@ -4,6 +4,9 @@ import argparse
 from multiprocessing import Pool
 import os
 from typing import Callable, Tuple
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "lib~"))
 import ffmpeg
 
 THREAD = 12

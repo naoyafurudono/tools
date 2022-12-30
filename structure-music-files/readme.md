@@ -11,6 +11,16 @@
 
 ## 使い方
 
+### 前準備
+
+1. `ffmpeg`のインストール
+    - 各自頑張ること
+1. 依存ライブラリのインストール
+    - `pip install -r requirements.txt -t lib~`
+    - `lib~`にインストールすること。ソースコードでハードコードしているので
+
+### 本題
+
 ```
 usage: python3 main.py [-h] [-o OUT] [--object_extension OBJECT_EXTENSION] -t TARGET_EXTENSION target_dir
 
