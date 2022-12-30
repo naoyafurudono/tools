@@ -5,7 +5,7 @@
 
 フォーマット変更は並列実行するのでそれなりに早い。
 
-## 依存
+## 依存ソフト
 
 - `ffmpeg`
 
@@ -19,7 +19,7 @@
     - `pip install -r requirements.txt -t lib~`
     - `lib~`にインストールすること。ソースコードでハードコードしているので
 
-### 本題
+### コマンドの使用
 
 ```
 usage: python3 main.py [-h] [-o OUT] [--object_extension OBJECT_EXTENSION] -t TARGET_EXTENSION target_dir
