@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 # アーティスト/アルバム/タイトル.mp3に分類・変換する
 
-from multiprocessing import Pool
+import multiprocessing
+from os import path
 import os
 from typing import Callable, Tuple
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "lib~"))
+sys.path.append(path.join(path.dirname(__file__), "lib~"))
 import ffmpeg
-
-THREAD = 12
 
 
 def run(
@@ -21,7 +20,7 @@ def run(
 ):
     table = {}
     for target_path in (
-        os.path.join(target_dir, filename)
+        path.join(target_dir, filename)
         for filename in os.listdir(target_dir)
         if is_target_filename(filename)
     ):
@@ -29,18 +28,19 @@ def run(
         title = info["title"]
         album = info["album"]
         artist = info["artist"]
-        dir_path = os.path.join(artist, album)
-        obj_path = os.path.join(out_dir, dir_path, title + obj_extension)
+        dir_path = path.join(artist, album)
+        obj_path = path.join(out_dir, dir_path, title + obj_extension)
+
         table[target_path] = obj_path
 
     for obj_path in table.values():
         os.makedirs(os.path.dirname(obj_path), exist_ok=True)
-    with Pool(THREAD) as p:
-        p.map(lambda inst: conv(inst, quiet), table.items())
+    with multiprocessing.Pool() as p:
+        p.map(conv, ((frm, to, quiet) for (frm, to) in table.items()))
 
 
-def conv(inst: Tuple[str, str], quiet: bool):
-    frm, to = inst
+def conv(args: Tuple[str, str, bool]):
+    frm, to, quiet = args
     ffmpeg.input(frm).output(to).run(quiet=quiet)
 
 
