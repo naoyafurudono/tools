@@ -1,5 +1,6 @@
 # アーティスト/アルバム/タイトル.mp3に分類・変換する
 
+import argparse
 from multiprocessing import Pool
 import os
 from typing import Callable, Tuple
@@ -14,9 +15,9 @@ def is_target(file_path: str) -> bool:
 
 def run(
     target_dir: str,
-    out_dir: str = "out",
+    out_dir: str,
+    obj_extension: str,
     is_target_filepath: Callable[[str], bool] = is_target,
-    obj_extension: str = ".mp3",
 ):
     filenames = map(lambda name: os.path.join(target_dir, name), os.listdir(target_dir))
     table = {}
@@ -41,4 +42,28 @@ def conv(inst: Tuple[str, str]):
 
 
 if __name__ == "__main__":
-    run(target_dir='Unknown Album')
+    parser = argparse.ArgumentParser("python3 main.py")
+    parser.add_argument("target_dir")
+    parser.add_argument(
+        "-o", "--out", required=False, default="out", help="output directly name"
+    )
+    parser.add_argument(
+        "--object_extension",
+        required=False,
+        default=".mp3",
+        help="result file extension",
+    )
+    parser.add_argument(
+        "-t",
+        "--target_extension",
+        required=True,
+        default=".3gp",
+        help="input file extension used to filter files",
+    )
+    args = parser.parse_args()
+    run(
+        target_dir=args.target_dir,
+        out_dir=args.out,
+        obj_extension=args.object_extension,
+        is_target_filepath=lambda filepath: filepath.endswith(args.target_extension),
+    )
