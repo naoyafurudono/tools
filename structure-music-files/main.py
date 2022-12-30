@@ -78,7 +78,7 @@ def main():
 
 def file_extension(name: str) -> str:
     if len(name) <= 1 or name[0] != ".":
-        raise ValueError("foooooo")
+        raise ValueError()
     return name
 
 
