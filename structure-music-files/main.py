@@ -17,6 +17,7 @@ def run(
     out_dir: str,
     obj_extension: str,
     is_target_filename: Callable[[str], bool],
+    quiet: bool,
 ):
     table = {}
     for target_path in (
@@ -40,7 +41,7 @@ def run(
 
 def conv(inst: Tuple[str, str]):
     frm, to = inst
-    ffmpeg.input(frm).output(to).run()
+    ffmpeg.input(frm).output(to).run(quiet=quit)
 
 
 def main():
@@ -49,7 +50,11 @@ def main():
     parser = argparse.ArgumentParser("main.py")
     parser.add_argument("target_dir")
     parser.add_argument(
-        "-o", "--out", required=False, default="out", help="output directly name"
+        "-t",
+        "--target-extension",
+        required=True,
+        help="input file extension used to filter files",
+        type=file_extension,
     )
     parser.add_argument(
         "--object-extension",
@@ -59,12 +64,18 @@ def main():
         type=file_extension,
     )
     parser.add_argument(
-        "-t",
-        "--target-extension",
-        required=True,
-        default=".3gp",
-        help="input file extension used to filter files",
-        type=file_extension,
+        "-o",
+        "--out",
+        required=False,
+        default="out",
+        help="output directly name",
+    )
+    parser.add_argument(
+        "-q",
+        "--quiet",
+        required=False,
+        default=True,
+        action="store_true",
     )
     args = parser.parse_args()
 
@@ -73,6 +84,7 @@ def main():
         out_dir=args.out,
         obj_extension=args.object_extension,
         is_target_filename=lambda filepath: filepath.endswith(args.target_extension),
+        quiet=args.quiet,
     )
 
 
