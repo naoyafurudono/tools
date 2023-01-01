@@ -33,7 +33,7 @@ def run(
 
         table[target_path] = obj_path
 
-    for obj_path in table.values():
+    for obj_path in set(table.values()):
         os.makedirs(os.path.dirname(obj_path), exist_ok=True)
     with multiprocessing.Pool() as p:
         p.map(conv, ((frm, to, quiet) for (frm, to) in table.items()))
