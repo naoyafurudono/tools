@@ -7,7 +7,7 @@ import os
 from typing import Tuple
 import sys
 
-sys.path.append(path.join(path.dirname(__file__), "lib~"))
+#sys.path.append(path.join(path.dirname(__file__), "lib~"))
 import ffmpeg
 
 

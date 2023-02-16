@@ -5,11 +5,6 @@
 - フォーマット変更は並列実行するのでそれなりに早い。
 - `ffmpeg`のラッパー。
 
-## 依存ソフト
-
-- `ffmpeg`
-- `python3`
-
 ## 使い方
 
 ### 前準備
@@ -17,10 +12,13 @@
 1. `ffmpeg`のインストール
     - 各自頑張ること
 1. 依存ライブラリのインストール
-    - `pip install -r requirements.txt -t lib~`
-    - `lib~`にインストールすることに注意。ハードコードしている。
+    - `poetry install`
 
 ### コマンドの使用
+
+```
+peotry run python main.py <args>
+```
 
 ```
 usage: main.py [-h] [-o OUT] [--object-extension OBJECT_EXTENSION] -t TARGET_EXTENSION target_dir
