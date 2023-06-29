@@ -6,6 +6,7 @@ pub enum Cmd {
     Copy {
         from_path: PathBuf,
         base_name: String,
+        overwrite: bool,
     },
 }
 
@@ -16,6 +17,7 @@ impl Cmd {
         Ok(Cmd::Copy {
             from_path,
             base_name,
+            overwrite: args.force,
         })
     }
 
@@ -24,6 +26,7 @@ impl Cmd {
             Cmd::Copy {
                 from_path,
                 base_name,
+                overwrite,
             } => {
                 let mut to = from_path.clone();
                 to.set_file_name(base_name);
@@ -31,11 +34,11 @@ impl Cmd {
                 if !from.exists() {
                     return Err(format!(
                         "{} does not exist",
-                        from_path.to_str().ok_or("err")?
+                        from_path.to_str().ok_or("internal error")?
                     ));
                 }
-                if to.exists() {
-                    return Err(format!("{} already exists", to.to_str().ok_or("err")?));
+                if !overwrite && to.exists() {
+                    return Err(format!("{} already exists", to.to_str().ok_or("internal error")?));
                 }
                 fs::copy(from, to).map_err(|e| e.to_string())?;
                 Ok(())
