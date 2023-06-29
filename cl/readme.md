@@ -1,6 +1,6 @@
-# cl
+# easy-cp
 
-```
-cl path/to/deep/file newname
-// equiv to `cp path/to/deep/file path/to/deep/newname`
+```sh
+easy-cp path/to/deep/dir/file newname
+// equiv to `cp path/to/deep/file path/to/deep/dir/newname`
 ```
