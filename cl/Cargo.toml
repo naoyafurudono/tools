@@ -2,6 +2,8 @@
 name = "easy-cp"
 version = "0.1.0"
 edition = "2021"
+description = "A simple command line tool to copy files at deep position."
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
