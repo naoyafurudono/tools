@@ -8,7 +8,7 @@ mod cmd;
 #[derive(Parser)]
 #[command(name = "cl")]
 #[command(author = "Naoya Furudono <naoyafurudono@gmail.com>")]
-#[command(about = "cl src/deep/path/to/original-file new-file-name\n", long_about = None)]
+#[command(about = "cl src/deep/path/to/original-file new-file-name", long_about = None)]
 pub struct Args {
     from_path: String,
     base_name: String,
