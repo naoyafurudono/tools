@@ -19,7 +19,7 @@ pub struct Args {
 fn main() {
     let args = Args::parse();
     match Cmd::new(&args).and_then(|c| c.run()) {
-        Ok(_) => process::exit(0),
+        Ok(()) => process::exit(0),
         Err(e) => {
             eprintln!("{}", e);
             process::exit(1)
